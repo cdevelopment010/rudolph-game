@@ -40,6 +40,23 @@ body {
     z-index: 100;
 }
 
+.modal {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 30vw; 
+    border: 1px solid black; 
+    padding: 20px; 
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.25);
+}
+
+.start, .gameOver {
+    display: grid;
+    gap: 20px;
+}
+
 
 .box {
     display: inline-block;
@@ -81,4 +98,10 @@ body {
     to {
         top: 105vh; 
     }
+}
+
+
+
+.d-none {
+    display: none;
 }
