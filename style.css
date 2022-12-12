@@ -37,14 +37,17 @@ body {
     left: 50%; 
     background: red; 
     transform: translate(-50%, -50%);
+    z-index: 100;
 }
 
 
 .box {
     display: inline-block;
     position: absolute;
-    top: 25px; 
+    top: 25px;
+    /* top: 755px;  */
     left: 25px;  
+    /* left: 910px;   */
     height: 50px; 
     width: 50px; 
     background: blue; 
