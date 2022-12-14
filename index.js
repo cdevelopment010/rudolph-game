@@ -28,6 +28,8 @@ function updateState() {
 
 
 function startGame() {
+    let initialTime = new Date();
+    let lastKeyCode; 
     updateState();
 
     setTimeout(() => {
@@ -41,7 +43,7 @@ function startGame() {
 
     // Create a box every 2 seconds -- might be worth randomising the time slightly;
     let createBoxInterval = setInterval( () => {
-        generateBox('box-1', Math.random()*document.querySelector('.container').clientWidth, '3s' )
+        generateCarrot(Math.random()*document.querySelector('.container').clientWidth, '3s' )
     }, 2000)
 
 
@@ -52,44 +54,64 @@ function startGame() {
 
 
     window.addEventListener('keydown', function(e) {
+        resetTime(true, e.code);
         if(e.code === 'ArrowRight') {
             moveRudolph('right'); 
         } else if (e.code === 'ArrowLeft') {
             moveRudolph('left'); 
+        }
+        lastKeyCode = e.code; 
+    })
 
+    window.addEventListener('keyup', function( e ){
+        if(e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+            resetTime();
         }
     })
 
-
+    function resetTime( check = false, pKeyCode) {
+        let currentTime = new Date(); 
+        if (check) {
+            if (currentTime - initialTime >= 1000 && lastKeyCode !== pKeyCode) {
+                initialTime = new Date();
+            }
+        } else {
+            initialTime = new Date();
+        }
+    }
 
 
     function moveRudolph(direction) {
+        let keyDown = new Date(); 
+        let velocity = keyDown - initialTime; 
+        
+
         let rLeft = window.getComputedStyle(rudolph)['left'].split('px')[0]*1;
         let rWidth = window.getComputedStyle(rudolph)['width'].split('px')[0]*1;
         let clientWidth = document.querySelector('.container').clientWidth; 
         let movePx = 25; //change to increase/decrease speed across screen
         if (direction === 'right') {
-            rLeft += movePx
+            rLeft += movePx * (velocity /750)
         } else if (direction === 'left') {
-            rLeft -= movePx; 
+            rLeft -= movePx * (velocity / 750); 
         }
 
         // console.log(rudolph.getBoundingClientRect())
 
         // make sure it doesn't go off the screen!
-        if (rLeft - rWidth/2 <= 0 || rLeft + rWidth/2 >= clientWidth) return;
+        //if (rLeft - rWidth/2 <= 0 || rLeft + rWidth/2 >= clientWidth) return;
 
+        // console.log((rLeft +clientWidth) % clientWidth);
 
         //update position
-        rudolph.style.left = rLeft + 'px'; 
+        rudolph.style.left = (rLeft +clientWidth) % clientWidth + 'px'; 
     }
 
 
 
-    function generateBox(box, position, speed) {
+    function generateCarrot(position, speed) {
         const span = document.createElement('span');
-        span.classList.add('box')
-        span.classList.add(box); 
+        span.classList.add('carrot')
         span.style.left = position + 'px'; 
         span.style.animationDuration = speed; 
 
@@ -104,7 +126,7 @@ function startGame() {
 
 
     function checkCollision() {
-        let presents = document.querySelectorAll('.box'); 
+        let presents = document.querySelectorAll('.carrot'); 
         let rudoplhRect = rudolph.getBoundingClientRect(); 
         presents.forEach( p => {
             let pRect = p.getBoundingClientRect(); 
@@ -153,6 +175,19 @@ function resetScore() {
 
  
 
+let snowfall = setInterval(() => {
+    generateSnow();
+  }, 60)
 
+const generateSnow = () => {
+    let snow = document.createElement("span");
+    snow.classList.add('snow');
+    snow.style.animationDuration = '5s';
+    snow.style.left =  window.innerWidth * Math.random() + 'px';
+    snow.style.top = '30px'; 
 
-
+    document.body.appendChild(snow)
+    setTimeout(() => {
+      snow.remove();
+    }, 5000);
+  }

@@ -2,3 +2,8 @@
   - [x] Probably will need a function to run on setInterval
 - [x] Need to set a game function, and for the game to last only X amount of time.
 - [ ] Style!
+  - [ ] Rudolph's ears
+  - [ ] Maybe mouth???
+- [x] Speed up movement if holding down arrow key
+- [x] Allow object to move from one side of the screen to another
+- [ ] fake leadboard  

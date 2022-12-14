@@ -6,14 +6,17 @@
 }
 
 body {
-    overflow: hidden;}
+    overflow: hidden;
+    background: #040b30;
+}
 
 .score {
     position: fixed; 
+    color: white;
     top: 20px; 
     right: 20px; 
     padding: 10px; 
-    background: rgba(0,0,0,0.15); 
+    background: rgba(255,255,255,0.15); 
     border-radius: 10px; 
     width: 100px; 
 }
@@ -28,24 +31,13 @@ body {
 }
 
 
-#rudolph {
-    height: 100px; 
-    width: 100px; 
-    border: 1px solid red; 
-    position: absolute; 
-    bottom: 50px; 
-    left: 50%; 
-    background: red; 
-    transform: translate(-50%, -50%);
-    z-index: 100;
-}
-
 .modal {
     position: fixed; 
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%); 
     width: 30vw; 
+    background: white;
     border: 1px solid black; 
     padding: 20px; 
     border-radius: 10px;
@@ -58,7 +50,7 @@ body {
 }
 
 
-.box {
+.carrot {
     display: inline-block;
     position: absolute;
     top: 25px;
@@ -66,32 +58,35 @@ body {
     left: 25px;  
     /* left: 910px;   */
     height: 50px; 
-    width: 50px; 
-    background: blue; 
+    width: 20px; 
+    background: rgb(245, 129, 5); 
     animation: fall linear 1 forwards;
     animation-duration: 3s;
-    border-radius: 5px; 
+    border-radius: 5px 5px 50px 50px; 
 }
-
-.box::before, .box::after {
+ 
+.carrot::before, .carrot::after {
     content: ''; 
     position: absolute; 
-    background: white; 
+    background: rgb(127, 187, 97); 
 } 
-.box::before {
-    top: 0; 
-    height: 100%; 
+.carrot::before {
+    top: 0px; 
+    height: 15px; 
     width: 10px; 
-    left: 50%; 
-    transform: translate(-50%, 0%);
+    left: 40%; 
+    transform: translate(-50%, -50%);
+    z-index: -2;
 }
-.box::after {
-    top: 50%; 
-    height: 10px; 
-    width: 100%; 
-    left: 0; 
-    transform: translate(0%, -50%);
-}
+.carrot::after {
+    background: rgb(104, 149, 82); 
+    top: -5px; 
+    height: 17px; 
+    width: 10px; 
+    left: 60%; 
+    transform: translate(-50%, -50%);
+    z-index: -3;
+} 
 
 
 @keyframes fall {
@@ -104,4 +99,22 @@ body {
 
 .d-none {
     display: none;
+}
+
+
+
+.snow {
+    z-index: -1;
+    position: absolute;
+    height: 5px; 
+    width: 5px;
+    background: white; 
+    border-radius: 50%;
+	animation: snowfall linear forwards;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(101vh);
+    }
 }

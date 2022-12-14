@@ -1,0 +1,89 @@
+#rudolph {
+    height: 100px; 
+    width: 100px; 
+    /* border: 1px solid red;  */
+    position: absolute; 
+    bottom: 50px; 
+    left: 50%; 
+    /* background: rgb(115, 100, 100);  */
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+
+.mouth, .face, .horn {
+    position: relative;
+    transform: translate(-50%,-50%);
+}
+
+.mouth::before, .mouth::after, 
+.face::before, .face::after 
+{
+    content: '';
+    position: absolute; 
+    transform: translate(-50%,-50%);
+}
+
+
+.mouth {
+    width: 70px;
+    height: 35px; 
+    border-radius: 50%;
+    background: #FFFAF0;
+    top: 80%;
+    left: 50%; 
+}
+.mouth::after {
+    height: 25px; 
+    width: 25px; 
+    border-radius: 50%;
+    background: red; 
+    top: 5px; 
+    left: 50%; 
+}
+
+.face {
+    width: 60px;
+    height: 70px;     
+    background: #F2D7A7;
+    border-radius: 50%;
+    z-index: -1;
+    left: 50%; 
+    top: 15px; 
+}
+
+.face::before, .face::after {
+    height: 15px; 
+    width: 8px; 
+    background: black; 
+    border-radius: 50%; 
+    top: 35%;
+    left: 20%;
+    transform: rotate(5deg)
+}
+
+.face::before {
+    left: 70%;
+    transform: rotate(-5deg)
+}
+
+.horn {
+    position: absolute;
+    height: 60px; 
+    width: 40px;
+    background: #C29B68;
+    /* border-radius: 50%;  */
+    clip-path: polygon(35% 0, 65% 0, 70% 50%, 80% 30%, 100% 30%, 80% 70%, 65% 100%, 
+                    35% 100%, 20% 70%, 0 30%, 20% 30%, 35% 50%); 
+}
+
+.horn-1 {
+    top: -50px; 
+    left: -15%; 
+    transform: rotate(-10deg);
+}
+.horn-2 {
+    top: -50px; 
+    left: 50%; 
+    transform: rotate(10deg);
+}
