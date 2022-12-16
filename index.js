@@ -91,9 +91,9 @@ function startGame() {
         let clientWidth = document.querySelector('.container').clientWidth; 
         let movePx = 25; //change to increase/decrease speed across screen
         if (direction === 'right') {
-            rLeft += movePx * (velocity /750)
+            rLeft += movePx + (velocity /250)
         } else if (direction === 'left') {
-            rLeft -= movePx * (velocity / 750); 
+            rLeft -= movePx + (velocity / 250); 
         }
 
         // console.log(rudolph.getBoundingClientRect())
@@ -159,6 +159,34 @@ function startGame() {
     function finalScore() {
         let score = document.getElementById('score').innerText.split(":")[1]*1; 
         document.querySelector('#final-score').innerText = score;
+        
+
+        const leaderboard = document.getElementById('leaderboard'); 
+        const players = [];
+        const names = ['You!', 'Santa', 'Mrs Clause', 'Frostie', 'Buddy the Elf']
+        players[0] = {name: 'You!', score: score}
+        for(let i = 1; i < 5; i++){
+            let randScore = Math.random() < 0.5 ? 
+                    Math.max(0,Math.ceil(score - i*Math.random())) :
+                    Math.max(0,Math.ceil(score + i*Math.random())); 
+            players[i] = {name: names[i], score: randScore}
+            
+        }
+        players.sort((a,b) => b.score - a.score)
+        for(let player of players) {
+            const pPlayer = document.createElement("li"); 
+            const playerName = document.createElement('div'); 
+            const playerScore = document.createElement('div'); 
+            if (player.name == 'You!') {
+                pPlayer.classList.add('player'); 
+            }
+            playerName.innerText = player.name; 
+            playerScore.innerText = player.score; 
+            pPlayer.appendChild(playerName);
+            pPlayer.appendChild(playerScore);
+            leaderboard.appendChild(pPlayer)
+        }
+
         
         document.querySelector('.modal').classList.remove('d-none');
         document.querySelector('.modal .gameOver').classList.remove('d-none');

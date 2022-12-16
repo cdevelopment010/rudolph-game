@@ -88,6 +88,31 @@ body {
     z-index: -3;
 } 
 
+#leaderboard {
+    display: grid; 
+    grid-template-columns: 1fr;
+    gap: 10px; 
+}
+
+#leaderboard li {
+    list-style-type: none;
+    display: grid; 
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+}
+
+#leaderboard li div:first-of-type {
+    border-right: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+#leaderboard li div:last-of-type {
+    justify-self: center;
+    padding: 5px
+}
+.player {
+    background: lightblue
+}
 
 @keyframes fall {
     to {
